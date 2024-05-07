@@ -42,7 +42,7 @@ function App() {
                 />
                 <MyButton onClick={addNewPost}>Create post</MyButton>
             </form>
-            <PostList posts={posts} title={"Posts about JS"}/>
+            <PostList posts={posts} title={"Posts about software engineering"} />
         </div>
     );
 }
