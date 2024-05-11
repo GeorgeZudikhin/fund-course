@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import './styles/App.css';
 import PostList from "./components/PostList";
-import MyButton from "./components/UI/button/MyButton";
-import MyInput from "./components/UI/input/MyInput";
+import PostForm from "./components/UI/PostForm";
 
 function App() {
 
@@ -12,37 +11,18 @@ function App() {
         {id: 3, title: 'JavaScript', body: 'Description'},
     ]);
 
-    const [title, setTitle] = useState('');
-    const [body, setBody] = useState('');
-
-    const addNewPost = (e) => {
-        e.preventDefault();
-        const newPost = {
-            id: Date.now(),
-            title,
-            body
-        }
+    const createPost = (newPost) => {
         setPosts([...posts, newPost])
+    }
+
+    const removePost = (post) => {
+        setPosts(posts.filter(p => p.id !== post.id))
     }
 
     return (
         <div className="App">
-            <form action="">
-                <MyInput
-                    value={title}
-                    onChange={({target: {value}}) => setTitle(value)}
-                    type="text"
-                    placeholder="Post name"
-                />
-                <MyInput
-                    value={body}
-                    onChange={({target: {value}}) => setBody(value)}
-                    type="text"
-                    placeholder="Post description"
-                />
-                <MyButton onClick={addNewPost}>Create post</MyButton>
-            </form>
-            <PostList posts={posts} title={"Posts about software engineering"} />
+            <PostForm create={createPost}/>
+            <PostList posts={posts} title={"Posts about software engineering"} remove={removePost}/>
         </div>
     );
 }
